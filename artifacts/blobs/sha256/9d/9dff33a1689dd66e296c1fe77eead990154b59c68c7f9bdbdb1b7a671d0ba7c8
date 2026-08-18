@@ -1,0 +1,78 @@
+# Timeout and Streaming Contract
+
+Status: canonical **V6/OpenCode development target contract**, corrected 2026-08-18.
+
+> Implementation status: the checked-in LiteLLM/bridge deployment is **not yet fully aligned** with this target. `Pukujan/litellm-ckff-ops#24` tracks the required implementation and qualification work. Do not infer that a documented target is already deployed.
+
+## Canonical V6 inference deadline
+
+For the Cortex V6 cross-vendor development lane, the model-transport contract is intentionally simple:
+
+> **One model request ceiling: 600 seconds.**
+
+The target CKFF development route is `https://ckffai.com/v1`, whose provider notice states a 600-second network timeout. LiteLLM, compatibility bridges, and OpenCode must not impose a shorter model-request ceiling for this lane once qualified.
+
+Required configuration intent:
+
+```yaml
+inference:
+  api_base: https://ckffai.com/v1
+  request_timeout_seconds: 600
+  opencode_request_timeout_ms: 600000
+  stream_preferred: true
+  exact_model_identity_required: true
+  cross_model_fallback_default: false
+```
+
+OpenCode expresses the request ceiling as `600000` milliseconds in provider configuration. A compatibility bridge or model-specific override must not silently shorten the selected model attempt below 600 seconds.
+
+## What is not another model timeout
+
+Other software can have bounded deterministic operations such as health checks, local subprocesses, tests, deployment probes, stream-chunk inactivity checks, or verification commands. Those limits are **not model-seat deadlines** and must not be surfaced to Cortex as alternative inference timeout values.
+
+A lower-timeout backup route may exist operationally, but it is not interchangeable with the qualified 600-second V6 development lane. Deliberately choosing another route is a separate route qualification, not a reason to make Cortex reason about a stack of 20/30/60/120/180/240/300-second model deadlines.
+
+## OpenCode qualification rule
+
+Configure the installed OpenCode provider for `600000` ms and run a controlled qualification that lasts beyond any previously observed hidden ~300-second cutoff. If that OpenCode build terminates a valid request earlier than the configured 600-second ceiling, the build is unqualified for this lane. Do not convert a client defect into a new Cortex timeout policy.
+
+The lane is not considered qualified until #24 records the exact OpenCode version/configuration and the controlled probe result.
+
+## Streaming rule
+
+Use streaming for long generations whenever the model and client support it. Streaming can keep an otherwise idle connection active, but it does not create a different semantic deadline and does not extend the 600-second ceiling.
+
+## Exact model identity and fallback ownership
+
+The selected model seat must remain observable end to end.
+
+- A caller names the exact LiteLLM model selected by the Cortex/bootstrap seating policy.
+- The V6/OpenCode lane defaults to **no cross-model fallback** below Cortex.
+- Transport retries that preserve the same logical model identity may remain transport concerns.
+- A different model/vendor must not be substituted silently.
+- Model failure returns to the seating controller, which decides retry versus cross-vendor switch.
+- If requested and actual model identities differ unexpectedly, the response is invalid seating evidence.
+
+This prevents LiteLLM/bridge behavior from corrupting Cortex model ranking, vendor diversity, retry counts, cost attribution, or assurance evidence.
+
+## Failure reporting
+
+Inference failures should distinguish what is known without inventing extra deadline policy:
+
+- `provider_timeout`: the upstream model route exceeded/failed within the qualified request;
+- `transport_timeout`: LiteLLM/bridge/client ended the request before a valid model result;
+- `model_unavailable`: the exact selected model/route is unavailable;
+- `rate_limited`: provider/account capacity rejected the request;
+- `unknown_transport_failure`: evidence is insufficient to identify the layer.
+
+Transport failure is not automatically model-capability failure. In particular, do not replay an oversized or broken transport request across vendors and then charge every timeout to the models themselves.
+
+## Data-egress qualification is separate
+
+A transport can satisfy the 600-second contract and still be unauthorized for a repository/work packet. Cortex V6 issue #30 separately governs data classification, secret handling, and egress authority for live external-model development. Both transport qualification and egress qualification are required.
+
+## Historical / legacy behavior
+
+Earlier revisions documented multiple 20/30/60/120/180/240/300-second envelopes inherited from Cortex V5, local bridges, backup routes, and troubleshooting experiments. Existing implementation may still contain some of those shorter ceilings until #24 is completed.
+
+Those values are implementation history/gaps. They are **not** the V6/OpenCode model execution policy.
