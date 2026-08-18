@@ -1,163 +1,125 @@
 # Cortex V6 / FOSSIL decision lineage
 
-Pack: `pack_a4b5515c4c6a4f38ac433e04b03ab406` (dedicated Cortex V6 project pack)
+Pack: `pack_a4b5515c4c6a4f38ac433e04b03ab406`
 
-## Current authority rule
+> **STATUS: STAGED / QUARANTINED.**
+>
+> This file is a human-readable project-pack view, not proof of active FOSSIL state. The initial pack was built through FOSSIL contracts, but the later fresh-audit append bypassed the executable `DurableEventStore` path. Mechanical adversarial validation found all nine newly appended fresh-audit event IDs conflict with FOSSIL deterministic identity and would be rejected by real ingestion.
+>
+> See `../ingestion/2026-08-18-fresh-audit-validation-failure.md` and repository issue #1. Until that issue closes with real validation/authorization/commit evidence, do **not** treat the fresh/adversarial claims as active DICS/Graphiti knowledge or `CURRENT_BEST`.
 
-The original 2026-08-17/18 locked-plan evidence remains preserved. The **fresh-session audit does not erase it**. Instead, it records a partial supersession:
+## What remains trustworthy as evidence
 
-- vendor-independent kernel/ownership invariants remain current;
-- the #2 → #3 → #4/#7 minimal-kernel floor remains current;
-- later implementation-specific architecture choices are reopened as hypotheses until their new qualification gates pass.
+The repository still preserves useful immutable/project evidence:
 
-Primary fresh-audit snapshot: `snap_94484b6649c7963f3ca2034d` / `art_7d72739f9b5c2b1ac15facdae459a3e8`.
+- the reconstructed public shared-chat checkpoint, explicitly labeled reconstructed;
+- pinned original locked-plan / Issue #9 / PR #20–#24 source snapshots from the initial builder;
+- pinned later source artifacts for the fresh audit, OpenCode runbook, and LiteLLM timeout contract.
 
-Machine-readable current-position graph: `lineages/lin_cortex_v6_fresh_session_audit_20260818.json`.
+Source preservation is not the same as knowledge promotion. The invalid fresh event append remains in Git history/files as a rejected staging attempt until rebuilt through FOSSIL contracts.
 
-## Current evidence states
-
-### Stable / current
-
-- **Primary / supported:** project artifacts own current project truth and acceptance meaning.
-- **Primary / supported:** Cortex V6 owns authoritative requirement/work/generation identity, authority, evidence admission, and lifecycle transitions.
-- **Primary / supported:** external runtime/model/FOSSIL/assurance outputs cannot directly complete V6 work.
-- **Primary / supported:** FOSSIL owns durable knowledge/evidence/provenance/lineage, not active V6 lifecycle state.
-- **Primary / supported:** GitHub/CI remains an independent merge boundary.
-- **Primary / supported:** the first implementation floor remains #2 → #3 → #4/#7.
-- **Primary / supported:** PR #23/#24 behavior must be combined and qualified on one exact production SHA before later architecture. (`clm_v6_combined_kernel_gate_20260818`)
-- **Primary / supported:** external qualification and serious simpler-baseline falsification must happen before accumulating major later abstractions.
-
-### Superseded in part / reopened
-
-- The original "Microsoft-first/AWS-portable runtime" direction is no longer treated as one peer runtime-substitution axis.
-- A generic `AgentRuntime` seam is not automatically required merely because the old roadmap named it.
-- Generalized `AssurancePlan`/provider machinery must earn itself against direct/simple assurance invocation.
-- Exact multi-agent role vocabulary/topology remains experimental.
-- Project-only/FOSSIL-only/hybrid context remains an Issue #17 bakeoff; hybrid is not preselected.
-- The 3-probe / 30-normal retry policy is an unqualified target hypothesis, not inherited truth. (`clm_v6_retry_policy_hypothesis_20260818`)
-
-### Corrected architecture distinctions
-
-- **Primary / supported:** agent/orchestration framework portability and hosting/runtime portability are separate axes. (`clm_v6_framework_hosting_axes_separate_20260818`)
-- Microsoft Agent Framework remains a plausible **application framework/orchestration candidate**, to be compared with a simpler direct/local baseline.
-- AWS AgentCore is a **managed hosting/runtime candidate**; it may host application code using Microsoft Agent Framework or another framework rather than replacing the framework itself.
-- `no new abstraction needed yet` is a valid result for either axis.
-
-### Temporary OpenCode bootstrap lane
-
-Primary OpenCode snapshot: `snap_1a288e71f09eb31a06678d5b` / `art_989e7eae6135c3315d07c4d6d6d2069e`.
-
-- **Primary / supported:** OpenCode is a temporary bounded external execution shell only. (`clm_v6_opencode_external_shell_20260818`)
-- It may execute one pre-granulated authorized worker/test-writer packet in an isolated workspace or one read-oriented reviewer/researcher/evaluator packet.
-- It is **not** authoritative Cortex state, project planner, recursive orchestrator, hidden model router, completion authority, native #19 implementation, or a permanent dependency.
-- **Primary / supported:** read authority does not automatically grant external-model egress authority. (`clm_v6_external_egress_gate_20260818`)
-- #30 owns data classification/secret/egress policy; #33 owns OpenCode bootstrap qualification.
-
-### LiteLLM / model transport
-
-Primary transport snapshot: `snap_b15574fb4de0a21bc491c86f` / `art_9dff33a1689dd66e296c1fe77eead990`.
-
-- **Primary / supported target:** one V6/OpenCode model-request ceiling: **600 seconds**. (`clm_v6_transport_600s_exact_model_20260818`)
-- **Primary / supported target:** exact requested model identity; hidden cross-model fallback below Cortex is off by default. (`clm_v6_transport_no_hidden_fallback_20260818`)
-- Model retry/cross-vendor switch returns to bootstrap/Cortex seating policy.
-- Transport/rate-limit/tool/policy failures are not automatically model-capability failures.
-- **Implementation remains unqualified:** `Pukujan/litellm-ckff-ops#24` must align and prove the actual LiteLLM/bridge/OpenCode path.
-
-## Updated decision tree
+## Intellectual history — not yet final adjudication
 
 ```text
-V6 durable invariants (CURRENT)
-├─ Project owns CURRENT TRUTH / acceptance meaning
-├─ Cortex V6 owns CONTROL
-│  ├─ requirement/work/generation identity
-│  ├─ authority
-│  ├─ evidence admission
-│  └─ lifecycle transitions
-├─ FOSSIL owns KNOWLEDGE / provenance / lineage
-├─ GitHub/CI owns independent merge gate
-└─ external providers return results/evidence, not completion
-
-Minimal kernel floor (CURRENT)
-#2 ordinary SWE foundation
-  -> #3 walking skeleton
-  -> #4 stable task/context invariants
-     + #7 adversarial composition regressions
-          |
-          v
-       #26 COMBINE #4/#7 ON ONE EXACT SHA
-          |
-          v
-       #29 Phase A: independent external kernel qualification
-          |
-          v
-       #28 Gate A: serious simpler-baseline value test
-          |
-          v
-       #32: prove SSC v1 absent from live kernel path
-
-Future architecture (REOPENED / MUST EARN ITSELF)
-├─ application framework axis
-│  ├─ direct/local baseline
-│  └─ Microsoft Agent Framework candidate
-├─ hosting/runtime axis
-│  ├─ local/container baseline
-│  └─ AWS AgentCore candidate
-├─ assurance-provider abstraction
-├─ role/topology routing
-├─ #17 context bakeoff
-│  ├─ live-project only
-│  ├─ FOSSIL-only control/special case
-│  └─ hybrid live-authoritative + durable history
-└─ #31/#19 model seating + retry policy
-   └─ 3 probes / 30 normal retries = HYPOTHESIS until budgeted/qualified
-
-External bootstrap lane used to BUILD V6 (NOT native V6)
-#30 data-egress/secret authority
-  + litellm-ckff-ops#24 transport implementation qualification
-        |
-        v
-#33 OpenCode bootstrap qualification
-├─ pre-granulated packet
-├─ exact model seat
-├─ 600s request target
-├─ hidden fallback OFF
-├─ isolated mutation workspace / read-only review mode
-├─ independent project checks/CI
-└─ return control to bootstrap controller between granules
+Original long-session V6 plan
+  |
+  v
+Fresh-session audit proposal
+  - preserved minimal #2 -> #3 -> #4/#7 research floor
+  - challenged Microsoft/AWS layer assumptions
+  - moved value gates earlier
+  - added OpenCode/LiteLLM/data-egress qualifications
+  |
+  v
+Second adversarial campaign (Cortex-v6 #25)
+  - verified main branch protection is absent (#8)
+  - found missing durable lifecycle/recovery semantics (#34)
+  - found missing immutable project-snapshot fencing (#35)
+  - separated authority-grant issuance from scope enforcement (#36)
+  - separated logical verification from trust-root/OS isolation (#37)
+  - found CI/toolchain provenance gaps (#38)
+  - found benchmark tuning/holdout leakage risk (#39)
+  - found canonical-current-plan/readiness ambiguity (#40)
+  - requires blind independent red-team/adjudication (#41)
+  - confirmed the fresh FOSSIL append itself fails deterministic event identity
+  |
+  v
+NEXT: independent critic + adjudication + mechanical verification
+  |
+  v
+Canonical CURRENT PLAN in protected Cortex-v6 GitHub
+  |
+  v
+FOSSIL-backed rebuild / propose / validate / authorize / commit
+  |
+  v
+Only then compute/promote current knowledge positions
 ```
 
-## Corrected near-term execution order
+## Stable candidate invariants that have survived both audit rounds
 
-```text
-1. Review/accept #21 (#2)
-2. Rebase/review/accept #22 (#3)
-3. Integrate #23 + #24 and prove combined production composition (#26)
-4. Run independent bootstrap kernel qualification (#29 Phase A)
-5. Run minimal-kernel simpler-baseline/value gate (#28 Gate A)
-6. Prove SSC v1 is absent from the live kernel path (#32 early phase)
-7. Resolve framework-vs-hosting architecture (#27) before redefining #10-#12
-8. Qualify data egress + actual LiteLLM transport (#30 + litellm-ckff-ops#24)
-9. Qualify the external OpenCode bootstrap lane (#33)
-10. Qualify only V5 donors actually needed (#5 / #31)
-11. Expand later mechanisms one at a time behind progressive gates
-```
+These remain **candidate current positions supported by primary project evidence**, but this staging repository does not itself promote them into active FOSSIL:
 
-`clm_v6_corrected_execution_order_20260818` captures the key supersession: **do not start by implementing #10.**
+1. Project/human decisions own current project truth and acceptance meaning.
+2. Cortex should own only portable authoritative control semantics it can justify: exact work identity, authority, evidence admission, and lifecycle transitions.
+3. Model/runtime/FOSSIL/assurance outputs cannot directly declare Cortex work complete.
+4. Transcript/model assertions are not authoritative task truth.
+5. V5/SCC are donors/oracles/failure corpora rather than runtime inheritance trees.
+6. FOSSIL owns durable knowledge/provenance/lineage, not active Cortex lifecycle state.
+7. GitHub/CI should be an independent merge boundary—but current branch enforcement must actually be enabled before that is a factual operational claim.
+8. Added Cortex mechanism must beat a serious simpler baseline or be narrowed/removed.
+9. The #2 -> #3 -> #4/#7 sequence remains a useful **research/composition** floor, not evidence of production readiness.
 
-## Provenance
+## Positions explicitly reopened / under challenge
 
-Original evidence remains preserved:
+- Microsoft Agent Framework vs AWS AgentCore is not one peer runtime-substitution axis; application framework and hosting/runtime are separate dimensions.
+- A generic `AgentRuntime` abstraction is not automatically justified.
+- `AssurancePlan`/provider abstractions must earn themselves against direct simpler assurance.
+- Fixed role/topology ontologies are not settled.
+- project-only/FOSSIL-only/hybrid context remains an experiment.
+- 3 probe / 30 normal retries remains a hypothesis with cumulative-budget/failure-taxonomy requirements.
+- OpenCode is a replaceable bootstrap engineering shell candidate, not a Cortex dependency or sandbox.
+- Different model vendors do not imply full independence when transport/context/runtime/oracle/controller are shared.
+- The fresh-audit execution order is superseded by the second adversarial campaign and must not be promoted as current.
 
-- reconstructed shared-chat checkpoint in `conversations/` and its original lineage;
-- pinned original locked plan, Issue #9, and PR #20–#24 snapshots;
-- original append-only claim/relation events.
+## Current external gates
 
-Fresh audit evidence adds, without rewriting those records:
+### Cortex-v6
 
-- version-pinned fresh audit artifact/snapshot;
-- version-pinned OpenCode bootstrap contract artifact/snapshot;
-- version-pinned LiteLLM 600-second exact-model contract artifact/snapshot;
-- append-only fresh-audit claim events in `events/`;
-- `lineages/lin_cortex_v6_fresh_session_audit_20260818.json` describing preserved, superseded-in-part, current, and unresolved positions.
+Primary audit/governance source: `Pukujan/Cortex-v6#25`.
 
-When an older implementation-specific "locked" choice conflicts with this fresh audit, treat the older choice as **historical rationale under revalidation** unless Issue #25 later records an explicit disposition restoring it. Stable invariants are not superseded by that rule.
+Important current blockers include #8 and #26–#41. Issue #40 will eventually publish one concise canonical current plan/readiness ladder to protected `main`. Issue #41 requires a blind independent critic/adjudication pass before START.
+
+### LiteLLM/OpenCode
+
+`Pukujan/litellm-ckff-ops#24` tracks implementation of the 600-second exact-model/no-hidden-cross-model-fallback transport target. Cortex #30/#33/#37 govern egress, bootstrap-shell qualification, and lower-layer isolation.
+
+### FOSSIL
+
+`Pukujan/fossil-cortex-v6#1` is the only current authority for whether this staged fresh/adversarial decision material has passed real FOSSIL ingestion. It has not yet passed.
+
+## FOSSIL promotion rule
+
+Do not hand-edit invalid events into apparent correctness. Rebuild/adjoin the final adjudicated plan through the same FOSSIL stores/contracts used by the original pack builder:
+
+- content-addressed artifacts;
+- source snapshots/citations from actual bytes;
+- deterministic durable event identities from pack + idempotency key;
+- JSON Schema and semantic validation;
+- pack write authorization;
+- immutable commit/idempotency;
+- projection/rebuild evidence when a projection is used;
+- explicit claim/challenge/support/supersession history.
+
+The previous fresh audit should remain a proposal in the intellectual history, with adversarial challenges and final adjudication represented as later events rather than rewriting the past.
+
+## Resume rule
+
+A new session should start with:
+
+1. `Pukujan/Cortex-v6#25` and #34–#41;
+2. `Pukujan/fossil-cortex-v6#1` plus the validation-failure report;
+3. current GitHub branch/PR/ruleset state;
+4. only then historical locked/fresh-audit artifacts as lineage context.
+
+If a historical file says `CURRENT` but conflicts with the current GitHub audit/issues or this quarantine status, treat it as historical staging until real FOSSIL adjudication/commit says otherwise.
