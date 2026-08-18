@@ -1,34 +1,50 @@
 # Cortex V6 decision-lineage pack
 
+> **CURRENT STATUS — STAGED / QUARANTINED, NOT ACTIVE FOSSIL INGESTION**
+>
+> The original initial pack was built through FOSSIL contracts. The later 2026-08-18 fresh-audit append did **not** go through the real FOSSIL durable-event path and adversarial validation found all nine newly appended event IDs violate FOSSIL deterministic event identity. See `ingestion/2026-08-18-fresh-audit-validation-failure.md` and issue #1.
+>
+> Do not treat the fresh-audit event files or the previous human `CURRENT` labels as proof that active DICS/Graphiti contains those claims. They are durable staged evidence awaiting rebuild, validation, authorization, commit, and—where applicable—projection/rebuild proof.
+
 This dedicated project pack records the architecture decision trail for Cortex V6 and its boundary with FOSSIL. It is deliberately separate from `fossil-ai-systems`: V6 is the project whose decisions are being recorded, while FOSSIL remains the durable knowledge/evidence subsystem described by those decisions.
+
+`manifest.json` is authoritative about placement status: this is a staged project pack, not an upstream FOSSIL write.
 
 ## Current resume point
 
-The original 2026-08-17/18 plan is preserved as history. A fresh-session audit on 2026-08-18 partially superseded its **implementation-specific future architecture** while preserving the stable kernel/ownership invariants and the #2 → #3 → #4/#7 floor.
+The original 2026-08-17/18 plan remains preserved as historical evidence. A fresh-session audit on 2026-08-18 challenged parts of that plan, and a subsequent adversarial campaign in `Pukujan/Cortex-v6#25` found additional blockers/issues #34–#41 plus the FOSSIL ingestion defect.
+
+Therefore the earlier fresh-audit decision graph is **not the final current plan**. The intended lineage is now:
+
+```text
+original long-session plan
+  -> fresh-session audit proposal
+  -> adversarial challenges / counterexamples
+  -> blind independent critic + adjudication
+  -> canonical current V6 plan
+  -> real FOSSIL-validated events / promotion receipt
+```
 
 Start with:
 
-1. `docs/DECISION_LINEAGE.md` — human-readable current decision tree and supersession state.
-2. `lineages/lin_cortex_v6_fresh_session_audit_20260818.json` — machine-readable fresh-audit decision graph.
-3. `Pukujan/Cortex-v6#25` and child issues #26–#33 — current re-baselining work.
-4. The pinned primary artifacts/snapshots in this pack for the fresh audit, OpenCode bootstrap contract, and LiteLLM 600-second exact-model target.
-
-The current near-term rule is **do not start by implementing #10**. First integrate and qualify the minimal kernel, run the independent qualification/value gates, then qualify the external bootstrap lane and only add later abstractions one at a time.
+1. `ingestion/2026-08-18-fresh-audit-validation-failure.md` — why the fresh append is quarantined.
+2. `Pukujan/fossil-cortex-v6#1` — real rebuild/validate/commit/promotion gate.
+3. `Pukujan/Cortex-v6#25` — current adversarial pre-implementation gate.
+4. `Pukujan/Cortex-v6#34`–`#41` — second-round architectural/safety/evaluation findings.
+5. `docs/DECISION_LINEAGE.md` — human-readable lineage/status; historical proposal positions are preserved but not promoted merely because they exist.
 
 ## Evidence handling
 
 The public ChatGPT share page remains represented only as a reconstructed checkpoint. The original locked V6 plan, Issue #9, and PRs #20–#24 were captured separately as primary source snapshots.
 
-The fresh-session re-baseline adds new primary, version-pinned artifacts rather than rewriting those original records:
+The later fresh-audit staging added version-pinned artifacts for:
 
-- fresh V6 plan audit;
-- corrected OpenCode bootstrap execution contract;
-- canonical V6/OpenCode 600-second exact-model transport target.
+- the fresh V6 plan audit;
+- the corrected OpenCode bootstrap execution contract;
+- the canonical V6/OpenCode 600-second exact-model transport target.
 
-Append-only claim events capture the new positions and the decision lineage records which older positions are preserved, superseded in part, current, or unresolved.
-
-`docs/DECISION_LINEAGE.md` is the human-readable view; immutable artifacts, snapshots, conversations, lineage, and events are the durable record.
+Those source artifacts remain useful evidence. The defect is in treating manually appended event JSON as if it had passed the FOSSIL event-store boundary. Source evidence and durable knowledge promotion are distinct.
 
 ## Scope note
 
-This repository is a dedicated Cortex V6 project decision-lineage pack. It does not change the FOSSIL core schema/storage/ingestion contracts merely by recording V6 decisions; any future FOSSIL-core change still requires its own evidence and decision.
+This repository does not change FOSSIL core contracts merely by staging Cortex V6 decisions. FOSSIL availability is also not a Cortex V6 runtime correctness dependency. For this project campaign, the owner may choose successful FOSSIL promotion as a continuity/governance gate before high-cost implementation, while the canonical project plan must independently remain durable in protected GitHub.
