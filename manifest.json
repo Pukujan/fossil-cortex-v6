@@ -1,0 +1,34 @@
+{
+  "contract_version": "dkg.pack.v1",
+  "pack_id": "pack_a4b5515c4c6a4f38ac433e04b03ab406",
+  "name": "Cortex V6 decision lineage",
+  "kind": "project",
+  "description": "Durable, provenance-labelled evidence for Cortex V6 architecture decisions and its ownership boundary with FOSSIL. This is a staged local pack; it is not an upstream FOSSIL write.",
+  "schema_version": "dkg.event.v1",
+  "ontology_requirements": [
+    {
+      "ontology_id": "dkg.core",
+      "version_constraint": ">=1.0.0 <2.0.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "pack_id": "pack_269099f7b2ba43b7a99b9427d64092de",
+      "required": true,
+      "reason": "Shared FOSSIL source, provenance, and decision-lineage methodology."
+    }
+  ],
+  "read_mounts": [
+    "pack_269099f7b2ba43b7a99b9427d64092de",
+    "pack_a4b5515c4c6a4f38ac433e04b03ab406"
+  ],
+  "write_targets": [
+    "pack_a4b5515c4c6a4f38ac433e04b03ab406"
+  ],
+  "event_roots": ["events/"],
+  "artifact_manifests": ["artifacts/manifest.jsonl"],
+  "placement_hint": "dedicated",
+  "projection_namespace": "cortex-v6-decision-lineage",
+  "source_policy_ref": "policies/source-quality-v1.md",
+  "created_at": "2026-08-18T05:10:22Z"
+}

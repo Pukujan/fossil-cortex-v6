@@ -1,0 +1,53 @@
+{
+  "schema_version": "fossil.shared-chat-import.v1",
+  "import_id": "cortex-v6-shared-chat-import-2026-08-18",
+  "pack_id": "pack_a4b5515c4c6a4f38ac433e04b03ab406",
+  "observed_at": "2026-08-18T05:10:22Z",
+  "actor": {
+    "actor_id": "cortex-v6-decision-lineage-importer",
+    "harness_version": "cortex-v6-pack-ingest-v1",
+    "skill_id": "skill_research-ingestion",
+    "skill_version": "1.0.0"
+  },
+  "conversations": [
+    {
+      "conversation_id": "conv_cortex_v6_fossil_handoff_20260818",
+      "title": "Cortex V6 and FOSSIL implementation-handoff checkpoint",
+      "external_ref": "https://chatgpt.com/share/6a83d2c6-7d44-83ea-851f-48d98a6ac31f?ogimg=plain",
+      "source_path": "../fossil-cortex-v6/recovery/2026-08-18-cortex-v6-fossil-shared-chat-checkpoint.md",
+      "source_label": "reconstructed public shared-chat checkpoint: Cortex V6 / FOSSIL handoff",
+      "reconstruction_basis_refs": [
+        "https://chatgpt.com/share/6a83d2c6-7d44-83ea-851f-48d98a6ac31f?ogimg=plain",
+        "fossil-cortex-v6/recovery/2026-08-18-shared-page-observation.md",
+        "https://github.com/Pukujan/Cortex-v6/blob/49731f68f0843d368b4613774b57aa9ae48a4086/docs/V6_LOCKED_PLAN.md"
+      ],
+      "messages": [
+        {"message_id": "msg_v6_fossil_handoff_001", "role": "human", "actor_id": "shared-chat-user", "marker": "[message:001] The user-visible shared-chat checkpoint set the work order as: `1. docs/V6_LOCKED_PLAN.md 2. issue #9 3. inspect #2 / agent/swe-foundation 4. continue #2 → #3 → #4/#7 5. then expand/plan #10–#19`."},
+        {"message_id": "msg_v6_fossil_handoff_002", "role": "assistant", "actor_id": "chatgpt-share-rendered-response", "marker": "[message:002] The rendered response treated `docs/V6_LOCKED_PLAN.md` and Issue #9 as the durable architecture handoff, recorded through documentation PR #20."},
+        {"message_id": "msg_v6_fossil_handoff_003", "role": "assistant", "actor_id": "chatgpt-share-rendered-response", "marker": "[message:003] The rendered response ordered the first implementation path through #2 / PR #21 for the ordinary SWE foundation and #3 / PR #22 for one minimal walking skeleton."},
+        {"message_id": "msg_v6_fossil_handoff_004", "role": "assistant", "actor_id": "chatgpt-share-rendered-response", "marker": "[message:004] The rendered response placed #4 / PR #23 and #7 / PR #24 after the walking skeleton as the V4 stable-state/context and SCC-v2 adversarial-regression branches."},
+        {"message_id": "msg_v6_fossil_handoff_005", "role": "assistant", "actor_id": "chatgpt-share-rendered-response", "marker": "[message:005] The rendered response held #10–#19 as later execution packets rather than immediate implementation scope."},
+        {"message_id": "msg_v6_fossil_handoff_006", "role": "assistant", "actor_id": "chatgpt-share-rendered-response", "marker": "[message:006] The rendered response gave the intended integration order as #21, then #22, then the #23 and #24 siblings."}
+      ],
+      "lineage": {
+        "lineage_id": "lin_cortex_v6_fossil_handoff_20260818",
+        "nodes": [
+          {"node_id": "ln_v6_handoff_question_20260818", "kind": "question", "label": "V6 execution starting point", "text": "What is the intended V6 execution order after the architecture handoff?", "message_index": 0, "position_state": "current"},
+          {"node_id": "ln_v6_handoff_architecture_20260818", "kind": "decision", "label": "Locked plan and Issue #9 anchor the handoff", "text": "The rendered checkpoint treats the locked plan and Issue #9 as the durable handoff source, with PR #20 documenting it.", "message_index": 1, "position_state": "current"},
+          {"node_id": "ln_v6_handoff_kernel_20260818", "kind": "decision", "label": "Foundation then walking skeleton", "text": "The first execution path is #2 / PR #21 followed by #3 / PR #22.", "message_index": 2, "position_state": "current"},
+          {"node_id": "ln_v6_handoff_regressions_20260818", "kind": "decision", "label": "Context and adversarial branches follow", "text": "The #4 / PR #23 and #7 / PR #24 branches follow the walking skeleton.", "message_index": 3, "position_state": "current"},
+          {"node_id": "ln_v6_handoff_scope_20260818", "kind": "assumption", "label": "Later packets stay out of the initial kernel", "text": "Issues #10–#19 are later execution packets rather than initial implementation scope.", "message_index": 4, "position_state": "unresolved"},
+          {"node_id": "ln_v6_handoff_conclusion_20260818", "kind": "conclusion", "label": "Intended integration order", "text": "The intended order is #21, then #22, then #23 and #24 as siblings.", "message_index": 5, "position_state": "current"}
+        ],
+        "edges": [
+          {"edge_id": "le_v6_handoff_001_20260818", "source_node_id": "ln_v6_handoff_question_20260818", "target_node_id": "ln_v6_handoff_architecture_20260818", "relation_type": "leads_to"},
+          {"edge_id": "le_v6_handoff_002_20260818", "source_node_id": "ln_v6_handoff_architecture_20260818", "target_node_id": "ln_v6_handoff_kernel_20260818", "relation_type": "leads_to"},
+          {"edge_id": "le_v6_handoff_003_20260818", "source_node_id": "ln_v6_handoff_kernel_20260818", "target_node_id": "ln_v6_handoff_regressions_20260818", "relation_type": "leads_to"},
+          {"edge_id": "le_v6_handoff_004_20260818", "source_node_id": "ln_v6_handoff_regressions_20260818", "target_node_id": "ln_v6_handoff_scope_20260818", "relation_type": "reframes"},
+          {"edge_id": "le_v6_handoff_005_20260818", "source_node_id": "ln_v6_handoff_regressions_20260818", "target_node_id": "ln_v6_handoff_conclusion_20260818", "relation_type": "supports"}
+        ],
+        "current_conclusion_refs": ["ln_v6_handoff_architecture_20260818", "ln_v6_handoff_kernel_20260818", "ln_v6_handoff_regressions_20260818", "ln_v6_handoff_conclusion_20260818"]
+      }
+    }
+  ]
+}
